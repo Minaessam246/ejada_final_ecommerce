@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 
 const CATEGORIES = ["male", "female", "boy", "girl"];
 
-export default function BestSelling() {
+export default function BestSelling({data}) {
   const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState("male");
 
@@ -14,7 +14,11 @@ export default function BestSelling() {
       .then((res) => setProducts(res.data)
       )
       .catch((err) => console.error(err));
+    // console.log(data);
+    
+    // setProducts(data)
   }, []);
+  
 
   const filteredProducts = products.filter(
     (product) => product.category === activeCategory

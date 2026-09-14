@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import PromoBanner from "../PromoBanner/PromoBanner";
+import BestSelling from "../BestSelling/BestSelling";
 
 
 export default function TrendingProducts() {
   const [products, setProducts] = useState([]);
-
+const [data, setData] = useState([])
   useEffect(() => {
     axios
       .get("https://6a955e28fa33b37f821a91e9.mockapi.io/product")
       .then((res) => {
         console.log(res.data);
+        
+        setData(res.data)
+        console.log(data);
         
         setProducts(res.data.filter((item) => item.populer));
       })
@@ -34,7 +38,7 @@ export default function TrendingProducts() {
           </div>
 
   <h2
-  className=" text-capitalize m-0"
+  className=" m-0"
   style={{
     fontFamily: "Poppins, sans-serif",
     fontSize: "45px",
@@ -65,7 +69,7 @@ export default function TrendingProducts() {
         </div>
 
         <div className="col-12 col-lg-9">
-          <div id="trendingCarousel" className="carousel slide">
+          <div id="carouselExampleIndicators" className="carousel slide">
             <div className="carousel-inner">
               {slides.map((slide, index) => (
                 <div
@@ -86,7 +90,7 @@ export default function TrendingProducts() {
           <button
   className="carousel-control-prev"
   type="button"
-  data-bs-target="#trendingCarousel"
+  data-bs-target="#carouselExampleIndicators"
   data-bs-slide="prev"
   style={{ width: "40px" }}
 >
@@ -96,7 +100,7 @@ export default function TrendingProducts() {
 <button
   className="carousel-control-next"
   type="button"
-  data-bs-target="#trendingCarousel"
+  data-bs-target="#carouselExampleIndicators"
   data-bs-slide="next"
   style={{ width: "40px" }}
 >
@@ -108,7 +112,7 @@ export default function TrendingProducts() {
                 <button
                   key={index}
                   type="button"
-                  data-bs-target="#trendingCarousel"
+                  data-bs-target="#carouselExampleIndicators"
                   data-bs-slide-to={index}
                   className={index === 0 ? "active bg-dark" : "bg-dark"}
                   aria-label={`Slide ${index + 1}`}
@@ -120,7 +124,7 @@ export default function TrendingProducts() {
 
       </div>
       <PromoBanner products={products} />
-      
+      <BestSelling data={data}/>
     </section>
   );
 }

@@ -8,17 +8,37 @@ import CustomerReviews from "./components/CustomerReviews/CustomerReviews";
 import Footer from "./components/Footer/Footer";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./index.css";
-function App() {
+import ProductDashboard from "./components/dashboard/Dashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+function Home() {
   return (
     <>
-    
+   
       <Hero />
       <Brands />
       <TrendingProducts />
-\      <BestSelling />
+  
       <CustomerReviews />
       <Footer />
     </>
+  );
+}
+function App() {
+  return (
+   <BrowserRouter>
+   <Routes>
+
+
+        <Route path="/" element={<Home />} />
+
+        <Route
+          path="/dashboard"
+          element={<ProductDashboard />}
+        />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 

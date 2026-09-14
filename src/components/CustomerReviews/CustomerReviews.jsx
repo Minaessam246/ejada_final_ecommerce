@@ -31,7 +31,7 @@ export default function CustomerReview() {
         {customers.map((customer) => (
           <div
             key={customer.id}
-            className="bg-light col-md-6  col-12 rounded-4 p-4 d-flex gap-3 flex-shrink-0"
+            className="bg-light col-md-6  col-12 rounded-4 p-4 d-flex gap-3 "
        
           >
             <img

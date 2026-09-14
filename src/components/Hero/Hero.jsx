@@ -8,7 +8,7 @@ export default function Hero() {
   style={{ minHeight: "120vh" }}
 >
     
-    <div className="position-absolute top-0 end-0 start-0  z-1">
+    <div className="position-absolute px-4 top-0 end-0 start-0  z-1">
         <Navbar />
 </div>
 
@@ -54,7 +54,7 @@ export default function Hero() {
           className="col-12 col-lg-7 position-relative overflow-hidden "
           style={{
     minHeight: "120vh",
-    background: "linear-gradient(90deg, #E4E4E4 0%, #FAFAFA 100%)",
+    background: "linear-gradient(90deg, #E4E4E4 0%, #FAFAFA 100%) ",
   }}
         >
      
@@ -76,7 +76,7 @@ export default function Hero() {
           </div>
 
           <img
-            src="/f779419cefdc8cfbf46ce1101ecac55f611f9b36.png"
+            src="/Group 71.png"
             className="position-absolute top-50 start-50 translate-middle" 
             style={{
               width: "85%",

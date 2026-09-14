@@ -1,6 +1,6 @@
 import React from "react";
 
-const QUICK_LINKS = ["Home", "Shop", "Category", "Contact", "Privacy"];
+
 
 export default function Footer() {
   return (
@@ -20,7 +20,6 @@ export default function Footer() {
               href="#"
               className="bg-white text-dark rounded-circle d-flex align-items-center justify-content-center"
               style={{ width: "42px", height: "42px" }}
-              aria-label="Facebook"
             >
               <i className="bi bi-facebook"></i>
             </a>
@@ -28,7 +27,6 @@ export default function Footer() {
               href="#"
               className="bg-white text-dark rounded-circle d-flex align-items-center justify-content-center"
               style={{ width: "42px", height: "42px" }}
-              aria-label="Instagram"
             >
               <i className="bi bi-instagram"></i>
             </a>
@@ -54,7 +52,7 @@ export default function Footer() {
         <div className="col-12 col-lg-3">
           <h5 className="mb-3">Quick Links</h5>
           <ul className="list-unstyled d-flex flex-column gap-2 mb-0">
-            {QUICK_LINKS.map((link) => (
+            {["Home", "Shop", "Category", "Contact", "Privacy"].map((link) => (
               <li key={link}>
                 <a href="#" className="text-secondary text-decoration-none">
                   {link}

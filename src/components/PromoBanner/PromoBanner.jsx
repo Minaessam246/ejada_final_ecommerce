@@ -11,13 +11,13 @@ export default function PromoBanner({ products }) {
  <div
   className="position-absolute fw-bold text-white"
   style={{
-    bottom: "-11%",
+    bottom: "-15%",
     left: "0",
     fontFamily:"inter",
     width: "100%",
     fontWeight: "bolder",
     letterSpacing: "2px",
-    fontSize: "25rem",
+    fontSize: "26rem",
     lineHeight: 1,
     opacity: 0.15,
     whiteSpace: "nowrap",
@@ -45,7 +45,7 @@ export default function PromoBanner({ products }) {
         <div className="row  align-items-center  justify-content-between " style={{ zIndex: 2 ,height: "500px", }}>
         <div className="col-12 col-lg-5 position-relative h-100 d-none d-xl-flex">
   <img
-    src="./public/WhatsApp Image 2026-09-05 at 4.38.54 PM-Photoroom.png"
+    src="/WhatsApp Image 2026-09-05 at 4.38.54 PM-Photoroom.png"
     className="position-absolute"
     style={{
       height: "650px",
@@ -58,7 +58,7 @@ export default function PromoBanner({ products }) {
   />
 </div>
 
-          <div className="col-12 col-lg-4 m-auto text-white  p-4 p-lg-5" >
+          <div className="col-11 col-xl-4 m-auto text-white  p-4 p-lg-5" >
             <h2 className="fw-bold display-5">Are you ready to lead the way</h2>
 
             <p className="mt-3" style={{ maxWidth: "420px" }}>
@@ -85,7 +85,7 @@ export default function PromoBanner({ products }) {
     className="d-flex gap-3 overflow-x-scroll brand-scroll"
     style={{ scrollSnapType: "x mandatory" }}
   >
-    {products.map((product) => (
+    {products?.map((product) => (
       <div
         key={product.id}
         className="bg-white rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
