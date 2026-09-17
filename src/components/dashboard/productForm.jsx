@@ -2,12 +2,12 @@ import React from "react";
 
 export default function ProductForm({
   form,
-  editId,
   change,
   image,
   submit,
   cancel,
-}) {
+  loading,
+})  {
   return (
     <form onSubmit={submit} className="row g-2 p-2 bg-md-transparent d-flex justify-content-center flex-column align-items-center">
       <div className="col-md-3 w-75">
@@ -20,22 +20,22 @@ export default function ProductForm({
           required
         />
       </div>
-
-      <div className="col-md-2 w-75">
-        <input
-          className="form-control"
-          name="category"
-          placeholder="Category"
-          value={form.category}
-          onChange={change}
-        />
-      </div>
-
+<select 
+  className="form-select col-md-2 w-75 "
+  name="category"
+  value={form.category}
+  onChange={change}
+  required
+>
+  <option value="male">Male</option>
+  <option value="female">Female</option>
+</select>
       <div className="col-md-2 w-75">
         <input
           className="form-control"
           type="number"
           name="price"
+          min={"0"}
           placeholder="Price"
           value={form.price}
           onChange={change}
@@ -86,10 +86,11 @@ export default function ProductForm({
         />
       </div>
 
-      <div className="col-md-2">
-        <button className="btn btn-primary me-2">
-          {editId ? "Update" : "Add"}
-        </button>
+      <div className="d-flex justify-content-center align-items-center ">
+       <button className="btn btn-primary me-2" disabled={loading}>
+  {loading ? <span className="loader"></span> : form.id ? "Update" : "Add"}
+</button>
+
 
         <button
           type="button"

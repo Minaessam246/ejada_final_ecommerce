@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ProductForm from "./productForm";
 
 
-const empty = {
+const emptyProduct = {
   name: "",
   category: "",
   price: "",
@@ -16,15 +16,16 @@ const empty = {
 
 export default function ProductDashboard() {
   const [products, setProducts] = useState([]);
-  const [form, setForm] = useState(empty);
-  const [editId, setEditId] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState(emptyProduct);
+  const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const getProducts = async () => {
     try {
-      setProducts((await axios.get("https://6a955e28fa33b37f821a91e9.mockapi.io/product")).data);
+      const res = await axios.get("https://6a955e28fa33b37f821a91e9.mockapi.io/product");
+      setProducts(res.data);
     } catch {
-      toast.error("Failed to load");
+      toast.error("Failed to load products");
     }
   };
 
@@ -34,135 +35,168 @@ export default function ProductDashboard() {
 
   const change = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+
+    setForm({
+      ...form,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
-  const image = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+ const image = (e) => {
+  const file = e.target.files[0];
 
-    const reader = new FileReader();
+  if (!file) return;
 
-    reader.onload = (e) => {
-      const img = new Image();
+  const reader = new FileReader();
 
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const scale = Math.min(600 / img.width, 600 / img.height, 1);
-
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-
-        canvas
-          .getContext("2d")
-          .drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        setForm({
-          ...form,
-          image: canvas.toDataURL("image/jpeg", 0.7),
-        });
-      };
-
-      img.src = e.target.result;
-    };
-
-    reader.readAsDataURL(file);
+  reader.onload = (event) => {
+    setForm({
+      ...form,
+      image: event.target.result,
+    });
   };
 
-  const save = async (e) => {
-    e.preventDefault();
+  reader.readAsDataURL(file);
+};
 
-    try {
-      editId
-        ? await axios.put(`${"https://6a955e28fa33b37f821a91e9.mockapi.io/product"}/${editId}`, form)
-        : await axios.post("https://6a955e28fa33b37f821a91e9.mockapi.io/product", form);
-
-      toast.success(editId ? "Updated" : "Added");
-      closeForm();
-      getProducts();
-    } catch (err) {
-      toast.error(err.response?.status === 413 ? "Image too large" : "Error");
-    }
+  const addProduct = () => {
+    setForm(emptyProduct);
+    setEditing(true);
   };
 
-  const edit = (product) => {
+
+  const editProduct = (product) => {
     setForm(product);
-    setEditId(product.id);
-    setShowForm(true);
+    setEditing(true);
   };
 
-  const remove = async (id) => {
-    try {
-      await axios.delete(`${"https://6a955e28fa33b37f821a91e9.mockapi.io/product"}/${id}`);
-      toast.success("Deleted");
-      getProducts();
-    } catch {
-      toast.error("Delete failed");
+const closeForm = () => {
+    setForm(emptyProduct);
+    setEditing(false);
+  };
+  const save = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  try {
+    if (form.id) {
+      await axios.put(`${"https://6a955e28fa33b37f821a91e9.mockapi.io/product"}/${form.id}`, form);
+      toast.success("Product updated");
+    } else {
+      await axios.post("https://6a955e28fa33b37f821a91e9.mockapi.io/product", form);
+      toast.success("Product added");
     }
-  };
 
-  const openForm = () => {
-    setForm(empty);
-    setEditId(null);
-    setShowForm(true);
-  };
+    closeForm();
+    getProducts();
+  } catch (err) {
+    toast.error(
+      err.response?.status === 413
+        ? "Image too large"
+        : "Something went wrong"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
-  const closeForm = () => {
-    setForm(empty);
-    setEditId(null);
-    setShowForm(false);
-  };
+
+const deleteProduct = (id) => {
+  toast.custom((t) => (
+    <div className="bg-white p-3 rounded shadow">
+      <p>Are you sure you want to delete this product?</p>
+
+      <button
+        className="btn btn-danger btn-sm me-2"
+        onClick={async () => {
+          
+setLoading(true)
+          try {
+          
+            await axios.delete(`${"https://6a955e28fa33b37f821a91e9.mockapi.io/product"}/${id}`);
+            toast.dismiss(t.id);
+            toast.success("Product deleted");
+            getProducts();
+          } catch(err) {
+            console.log(err);
+            
+            toast.error("Delete failed");
+          } finally {
+            setLoading(false);
+          }
+        }}
+        disabled={loading}
+      >
+        {loading ? <span className="loader"></span> : "Yes, Delete"}
+      </button>
+
+      <button
+        className="btn btn-secondary btn-sm"
+        onClick={() => toast.dismiss(t.id)}
+        disabled={loading}
+      >
+        Cancel
+      </button>
+    </div>
+  ));
+};
+
 
   return (
     <div className="container mt-4">
-      <Toaster />
 
+      <Toaster />
       <div className="d-flex justify-content-between mb-3">
         <h2>Product Dashboard</h2>
 
-      
       </div>
 
-  {showForm && (
-  <div
-    className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center"
-    style={{ zIndex: 1050 }}
-  >
-    <div className="bg-white rounded p-4 shadow w-75">
-      <ProductForm
-        form={form}
-        editId={editId}
-        change={change}
-        image={image}
-        submit={save}
-        cancel={closeForm}
-      />
-    </div>
-  </div>
-)}
+      {editing && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center"
+          style={{ zIndex: 1050 }}
+        >
+          <div className="bg-white rounded p-4 shadow w-75">
+
+           <ProductForm
+  form={form}
+  change={change}
+  image={image}
+  submit={save}
+  cancel={closeForm}
+  loading={loading}
+/>
 
 
-      <table className="table  align-middle">
+          </div>
+        </div>
+      )}
+
+     
+      <table className="table align-middle table-borderless  ">
+
         <thead>
           <tr>
             <th>Image</th>
             <th>Name</th>
-            <th>Category</th>
+            <th className="d-none d-md-table-cell ">Category</th>
             <th>Price</th>
             <th>Popular</th>
-            <th>Details</th>
-            <th></th>
+            <th className="d-none d-md-table-cell ">Details</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
         <tbody>
-          {products.map((p) => (
-            <tr key={p.id}>
+
+          {products.map((product) => (
+            <tr  key={product.id}>
+
               <td>
-                {p.image && (
+                {product.image && (
                   <img
-                    src={p.image}
-                    alt={p.name}
+                    src={product.image}
+                    alt={product.name}
                     width="60"
                     height="60"
                     style={{ objectFit: "cover" }}
@@ -170,40 +204,58 @@ export default function ProductDashboard() {
                 )}
               </td>
 
-              <td>{p.name}</td>
-              <td >{p.category}</td>
-              <td>{p.price}</td>
-              <td >{p.populer ? "Yes" : "No"}</td>
-              <td>{p.product_details}</td>
+              <td>{product.name}</td>
 
-              <td className="col-2 ">
-                <button
-                  className="btn btn-sm btn-warning m-2"
-                  onClick={() => edit(p)}
+              <td  className="d-none d-md-table-cell">{product.category}</td>
+
+              <td>{product.price}</td>
+
+              <td>
+                {product.populer ? "Yes" : "No"}
+              </td>
+
+              <td className="d-none d-md-table-cell">{product.product_details}</td>
+
+              <td className="">
+    <button
+                  className="btn btn-sm btn-warning  "
+                  onClick={() => editProduct(product)}
                 >
                   Edit
                 </button>
 
-                <button
+     
+
+               
+              </td>
+                    <td>     <button
                   className="btn btn-sm btn-danger"
-                  onClick={() => remove(p.id)}
+                  onClick={() => deleteProduct(product.id)}
                 >
                   Delete
                 </button>
-              </td>
+                </td> 
+
             </tr>
           ))}
+
         </tbody>
+
       </table>
-  <div className="d-flex justify-content-between my-2  align-items-center">
-       <Link to="/" className="btn btn-dark">
+
+ 
+   <div className="d-flex justify-content-between align-items-center">
+   <Link to="/" className="btn btn-dark">
         Back to Home
       </Link>
-<button className="btn btn-success" onClick={openForm}>
+   <button
+          className="btn btn-success"
+          onClick={addProduct}
+        >
           + Add Product
         </button>
-   
-  </div>
+
+   </div>
     </div>
   );
 }

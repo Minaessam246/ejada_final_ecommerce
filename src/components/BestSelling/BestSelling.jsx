@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 
-const CATEGORIES = ["male", "female", "boy", "girl"];
 
 export default function BestSelling({data}) {
   const [products, setProducts] = useState([]);
@@ -33,7 +32,7 @@ export default function BestSelling({data}) {
       </h2>
 
       <div className="d-flex justify-content-center gap-3 mb-5 flex-wrap">
-        {CATEGORIES.map((category) => (
+        {["male", "female", "boy", "girl"].map((category) => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}

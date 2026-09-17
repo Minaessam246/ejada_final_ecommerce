@@ -121,7 +121,6 @@ const [data, setData] = useState([])
             </div>
           </div>
         </div>
-
       </div>
       <PromoBanner products={products} />
       <BestSelling data={data}/>
