@@ -20,13 +20,12 @@ export default function ProductCard({ product }) {
       <div className="d-flex align-items-center justify-content-between">
         <div>
           <p className="mb-1 text-dark">{name}</p>
-          <p className="fw-semibold mb-0">₹ {parseFloat(price).toFixed(2)}</p>
+          <p className="fw-semibold mb-0">₹ {price}</p>
         </div>
 
         <button
           className="btn btn-dark rounded-circle d-flex align-items-center justify-content-center p-0"
           style={{ width: "40px", height: "40px" }}
-          aria-label={`View ${name}`}
         >
           <i className="bi bi-arrow-up-right"></i>
         </button>

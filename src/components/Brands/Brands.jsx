@@ -20,7 +20,7 @@ export default function Brands() {
       >
         <img
           src="/WhatsApp Image 2026-09-05 at 4.35.14 PM-Photoroom.png"
-          alt="Brand"
+    
           style={{
             height: "70%",
             width: "auto",
@@ -30,7 +30,6 @@ export default function Brands() {
 
         <img
           src="/WhatsApp Image 2026-09-05 at 4.36.31 PM-Photoroom.png"
-          alt="Brand"
           style={{
             height: "70%",
             width: "auto",
@@ -40,7 +39,6 @@ export default function Brands() {
 
         <img
           src="/images.png"
-          alt="AJIO"
           style={{
             height: "70%",
             width: "auto",
@@ -50,7 +48,6 @@ export default function Brands() {
 
         <img
           src="/WhatsApp Image 2026-09-05 at 4.35.14 PM-Photoroom.png"
-          alt="Brand"
           style={{
             height: "70%",
             width: "auto",
@@ -60,7 +57,6 @@ export default function Brands() {
 
         <img
           src="/WhatsApp Image 2026-09-05 at 4.36.31 PM-Photoroom.png"
-          alt="Brand"
           style={{
             height: "70%",
             width: "auto",

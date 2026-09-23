@@ -91,9 +91,7 @@ const closeForm = () => {
     getProducts();
   } catch (err) {
     toast.error(
-      err.response?.status === 413
-        ? "Image too large"
-        : "Something went wrong"
+      err.response.data
     );
   } finally {
     setLoading(false);

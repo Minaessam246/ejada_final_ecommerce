@@ -27,8 +27,11 @@ export default function ProductForm({
   onChange={change}
   required
 >
+  <option value="">Select Category</option>
   <option value="male">Male</option>
   <option value="female">Female</option>
+  <option value="boy">Boy</option>
+  <option value="girl">Girl</option>
 </select>
       <div className="col-md-2 w-75">
         <input
@@ -54,7 +57,6 @@ export default function ProductForm({
         {form.image && (
           <img
             src={form.image}
-            alt="preview"
             className="mt-2"
             width="70"
             height="70"

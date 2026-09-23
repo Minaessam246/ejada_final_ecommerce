@@ -20,8 +20,6 @@ export default function PromoBanner({ products }) {
     fontSize: "26rem",
     lineHeight: 1,
     opacity: 0.15,
-    whiteSpace: "nowrap",
-    userSelect: "none",
     pointerEvents: "none",
     overflow: "hidden",
   }}
@@ -109,7 +107,6 @@ export default function PromoBanner({ products }) {
         style={{
           height: "6px",
           width: index === 1 ? "20px" : "6px",
-          opacity: index === 1 ? 1 : 0.5,
         }}
       ></span>
     ))}

@@ -64,7 +64,7 @@ export default function Hero() {
               top: "100%",
               left: "4%",
               fontSize: "12rem",
-              lineHeight: 0.85,
+              
               color: "white",
               zIndex: 0,
           

@@ -115,7 +115,6 @@ const [data, setData] = useState([])
                   data-bs-target="#carouselExampleIndicators"
                   data-bs-slide-to={index}
                   className={index === 0 ? "active bg-dark" : "bg-dark"}
-                  aria-label={`Slide ${index + 1}`}
                 ></button>
               ))}
             </div>

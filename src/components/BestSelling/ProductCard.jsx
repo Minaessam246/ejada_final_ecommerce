@@ -14,7 +14,6 @@ export default function ProductCard({ product, badge }) {
 
       <button
         className="btn position-absolute top-0 end-0 m-3 p-0 border-0"
-        aria-label="Add to wishlist"
       >
         <i className="bi bi-heart fs-5"></i>
       </button>
@@ -35,7 +34,7 @@ export default function ProductCard({ product, badge }) {
         <div>
           <p className="mb-1 text-dark fw-semibold">{name}</p>
           <p className="mb-0">
-            <span className="fw-semibold">₹ {parseFloat(price).toFixed(2)}</span>{" "}
+            <span className="fw-semibold">₹ {Math.floor(price)}</span>{" "}
             <span className="text-secondary text-decoration-line-through ms-1">
               ₹ {Math.floor(price*1.5)}
             </span>
@@ -45,7 +44,6 @@ export default function ProductCard({ product, badge }) {
         <button
           className="btn btn-dark rounded-circle d-flex align-items-center justify-content-center p-0"
           style={{ width: "40px", height: "40px" }}
-          aria-label={`View ${name}`}
         >
           <i className="bi bi-arrow-up-right"></i>
         </button>
