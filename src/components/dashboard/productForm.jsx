@@ -9,7 +9,9 @@ export default function ProductForm({
   loading,
 })  {
   return (
+    
     <form onSubmit={submit} className="row g-2 p-2 bg-md-transparent d-flex justify-content-center flex-column align-items-center">
+      <h3 className="px-3" >{form.id ? "Edit" : "Add"} product</h3>
       <div className="col-md-3 w-75">
         <input
           className="form-control "

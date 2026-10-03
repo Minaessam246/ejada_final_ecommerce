@@ -15,7 +15,7 @@ const [data, setData] = useState([])
         console.log(res.data);
         
         setData(res.data)
-        console.log(data);
+        console.log('mmm',data);
         
         setProducts(res.data.filter((item) => item.populer));
       })
@@ -26,9 +26,9 @@ const [data, setData] = useState([])
   for (let i = 0; i < products.length; i += 3) {
     slides.push(products.slice(i, i + 3));
   }
-
+    console.log('mmm2',{data})
   return (
-    <section className="py-5 px-4 px-lg-5 bg-white">
+    <section className="py-5  px-5   bg-white">
       <div className="row align-items-center g-4">
 
         <div className="col-12 col-lg-3">
@@ -122,6 +122,8 @@ const [data, setData] = useState([])
         </div>
       </div>
       <PromoBanner products={products} />
+  
+      
       <BestSelling data={data}/>
     </section>
   );

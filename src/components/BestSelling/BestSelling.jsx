@@ -4,27 +4,16 @@ import ProductCard from "./ProductCard";
 
 
 export default function BestSelling({data}) {
-  const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState("male");
 
-  useEffect(() => {
-    axios
-      .get("https://6a955e28fa33b37f821a91e9.mockapi.io/product")
-      .then((res) => setProducts(res.data)
-      )
-      .catch((err) => console.error(err));
-    // console.log(data);
-    
-    // setProducts(data)
-  }, []);
   
 
-  const filteredProducts = products.filter(
+  const filteredProducts = data.filter(
     (product) => product.category === activeCategory
   );
 
   return (
-    <section className="py-5 px-4 px-lg-5 bg-white">
+    <section className="py-5  bg-white">
       <h2 className="text-center fw-bold mb-4">
         <span className="text-secondary me-2">—</span>
         Best Selling

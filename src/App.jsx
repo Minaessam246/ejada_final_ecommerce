@@ -10,20 +10,10 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./index.css";
 import ProductDashboard from "./components/dashboard/Dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
-function Home() {
-  return (
-    <>
-   
-      <Hero />
-      <Brands />
-      <TrendingProducts />
-  
-      <CustomerReviews />
-      <Footer />
-    </>
-  );
-}
+
 function App() {
   return (
    <BrowserRouter>
@@ -34,7 +24,7 @@ function App() {
 
         <Route
           path="/dashboard"
-          element={<ProductDashboard />}
+          element={<Dashboard />}
         />
 
       </Routes>

@@ -14,7 +14,7 @@ export default function CustomerReview() {
   }, []);
 
   return (
-    <section className="py-5 px-4 px-lg-5 bg-white brand-scroll"  >
+    <section className="py-4  bg-white brand-scroll"  >
       <h2 className="text-center fw-bold mb-5">
         <span className="text-secondary me-2">—</span>
         Customer Review

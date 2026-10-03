@@ -3,7 +3,7 @@ import React from "react";
 
 export default function PromoBanner({ products }) {
   return (
-    <section className="py-5 px-4 px-lg-5 bg-white ">
+    <section className="py-5  bg-white ">
       <div
         className="position-relative overflow-visible rounded-4"
         style={{ backgroundColor: "#f97b7b", minHeight: "460px" }}
@@ -11,13 +11,13 @@ export default function PromoBanner({ products }) {
  <div
   className="position-absolute fw-bold text-white"
   style={{
-    bottom: "-15%",
+    bottom: "-19%",
     left: "0",
     fontFamily:"inter",
     width: "100%",
     fontWeight: "bolder",
-    letterSpacing: "2px",
-    fontSize: "26rem",
+    letterSpacing: "4px",
+    fontSize: "28rem",
     lineHeight: 1,
     opacity: 0.15,
     pointerEvents: "none",
